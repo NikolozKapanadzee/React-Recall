@@ -12,7 +12,7 @@ function MyComponent() {
 
   return (
     <>
-      <div>
+      <div className="guja">
         <input value={name} onChange={handleNameChange} />
         <p>Name: {name}</p>
 
