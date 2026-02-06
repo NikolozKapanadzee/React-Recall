@@ -1,8 +1,10 @@
-export default function TapButton({ label, click }: any) {
+export default function TapButton({ label, click, isSelected }: any) {
   return (
     <div>
       <li>
-        <button onClick={click}>{label}</button>
+        <button className={isSelected ? "active" : undefined} onClick={click}>
+          {label}
+        </button>
       </li>
     </div>
   );

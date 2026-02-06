@@ -11,10 +11,26 @@ function App() {
   return (
     <>
       <main>
-        <TapButton click={() => handleClick("components")} label="Components" />
-        <TapButton click={() => handleClick("jsx")} label="JSX" />
-        <TapButton click={() => handleClick("props")} label="Props" />
-        <TapButton click={() => handleClick("state")} label="State" />
+        <TapButton
+          isSelected={selectedTopic === "components"}
+          click={() => handleClick("components")}
+          label="Components"
+        />
+        <TapButton
+          isSelected={selectedTopic === "jsx"}
+          click={() => handleClick("jsx")}
+          label="JSX"
+        />
+        <TapButton
+          isSelected={selectedTopic === "props"}
+          click={() => handleClick("props")}
+          label="Props"
+        />
+        <TapButton
+          isSelected={selectedTopic === "state"}
+          click={() => handleClick("state")}
+          label="State"
+        />
         <div>
           {!selectedTopic ? (
             <p>Please select a topic.</p>
