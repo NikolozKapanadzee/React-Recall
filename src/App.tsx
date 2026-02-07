@@ -1,51 +1,17 @@
-import { useState } from "react";
-import TapButton from "./components/TapButton";
-import { EXAMPLES } from "../src/data";
+import Header from "./components/Header";
+import PlayerInfo from "./components/PlayerInfo";
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState<any | null>(null);
-  const handleClick = (selectedButton: any) => {
-    setSelectedTopic(selectedButton);
-    console.log(selectedButton);
-  };
   return (
-    <>
-      <main>
-        <TapButton
-          isSelected={selectedTopic === "components"}
-          click={() => handleClick("components")}
-          label="Components"
-        />
-        <TapButton
-          isSelected={selectedTopic === "jsx"}
-          click={() => handleClick("jsx")}
-          label="JSX"
-        />
-        <TapButton
-          isSelected={selectedTopic === "props"}
-          click={() => handleClick("props")}
-          label="Props"
-        />
-        <TapButton
-          isSelected={selectedTopic === "state"}
-          click={() => handleClick("state")}
-          label="State"
-        />
-        <div>
-          {!selectedTopic ? (
-            <p>Please select a topic.</p>
-          ) : (
-            <>
-              <h3>{EXAMPLES[selectedTopic].title}</h3>
-              <p>{EXAMPLES[selectedTopic].description}</p>
-              <pre>
-                <code>{EXAMPLES[selectedTopic].code}</code>
-              </pre>
-            </>
-          )}
-        </div>
-      </main>
-    </>
+    <main>
+      <Header />
+      <div>
+        <ol>
+          <PlayerInfo name="Guja" symbol="X" />
+          <PlayerInfo name="Sandro" symbol="0" />
+        </ol>
+      </div>
+    </main>
   );
 }
 
