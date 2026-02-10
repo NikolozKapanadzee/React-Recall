@@ -1,17 +1,29 @@
+import { useState } from "react";
 import Header from "./components/Header";
-import PlayerInfo from "./components/PlayerInfo";
+import UserInput from "./components/UserInput";
+import Results from "./components/Results";
 
 function App() {
+  const [userInput, setUserInput] = useState({
+    initialInvestment: 10000,
+    annualInvestment: 1200,
+    expectedReturn: 6,
+    duration: 10,
+  });
+  const handleChange = (inputIdentifier: any, newValue: any) => {
+    setUserInput((prev) => {
+      return {
+        ...prev,
+        [inputIdentifier]: newValue,
+      };
+    });
+  };
   return (
-    <main>
+    <div className="flex flex-col gap-10">
       <Header />
-      <div>
-        <ol>
-          <PlayerInfo name="Guja" symbol="X" />
-          <PlayerInfo name="Sandro" symbol="0" />
-        </ol>
-      </div>
-    </main>
+      <UserInput onChangeInput={handleChange} userInput={userInput} />
+      <Results userInput={userInput} />
+    </div>
   );
 }
 
