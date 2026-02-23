@@ -1,36 +1,33 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+
+type Post = {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+};
 
 function App() {
-  const enteredPlayerName = useRef<HTMLInputElement | null>(null);
-  const [playerName, setPlayerName] = useState("Unknown Player");
-  const handleClick = () => {
-    if (enteredPlayerName.current) {
-      setPlayerName(enteredPlayerName.current.value);
-    }
-  };
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const data: Post[] = await res.json();
+      setPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <section className="bg-white p-6 rounded-xl shadow-md w-[320px]">
-        <h1 className="text-xl font-semibold text-gray-800 text-center mb-5">
-          {playerName ?? "Unknown Player"}
-        </h1>
-
-        <div className="flex flex-col gap-3">
-          <input
-            ref={enteredPlayerName}
-            type="text"
-            placeholder="Enter name"
-            className="px-3 py-2.5 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-
-          <button
-            onClick={handleClick}
-            className="py-2.5 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-500 transition cursor-pointer"
-          >
-            Set Name
-          </button>
-        </div>
-      </section>
+    <div>
+      <h1>Post Titles</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.body}</li>
+        ))}
+      </ul>
     </div>
   );
 }
