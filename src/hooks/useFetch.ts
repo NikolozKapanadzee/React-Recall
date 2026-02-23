@@ -1,22 +1,16 @@
 import { useEffect, useState } from "react";
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-};
-
-function useFetch() {
-  const [users, setUsers] = useState<User[]>([]);
+function useFetch<T>(url: string) {
+  const [data, setData] = useState<T[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
-      const data = await res.json();
-      setUsers(data);
+      const res = await fetch(url);
+      const json: T[] = await res.json();
+      setData(json);
     };
     fetchData();
-  }, []);
-  return users;
+  }, [url]);
+  return data;
 }
 
 export default useFetch;
